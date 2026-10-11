@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://c482i3pbbhxri"]
+
+[ext_resource type="Script" uid="uid://dyquy7selykic" path="res://Main scene/main.gd" id="1_3dcda"]
+[ext_resource type="Script" uid="uid://dsbvggxv6ngbp" path="res://Main scene/network_server.gd" id="2_g3q3t"]
+[ext_resource type="Script" uid="uid://rpj373pmilnn" path="res://Main scene/dilemme_gen.gd" id="3_t6lx1"]
+
+[node name="Main" type="Control" unique_id=916423008]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3dcda")
+
+[node name="Label" type="Label" parent="." unique_id=298038908]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 459.0
+offset_right = 549.0
+offset_bottom = 656.0
+text = "blabla"
+
+[node name="Button" type="Button" parent="." unique_id=1913809893]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 23.0
+offset_right = 466.0
+offset_bottom = 345.0
+
+[node name="NetworkServer" type="Node" parent="." unique_id=258491582]
+script = ExtResource("2_g3q3t")
+
+[node name="DilemmeGen" type="Node" parent="." unique_id=934413952]
+script = ExtResource("3_t6lx1")
+
+[node name="Liste_D" type="Label" parent="." unique_id=253122354]
+layout_mode = 0
+offset_left = 644.0
+offset_top = 60.0
+offset_right = 997.0
+offset_bottom = 257.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="un_joueur_a_vote" from="NetworkServer" to="." method="_on_network_server_un_joueur_a_vote"]
