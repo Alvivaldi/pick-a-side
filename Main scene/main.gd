@@ -4,10 +4,22 @@ enum GameState { WAITING_PLAYERS, DILEMMA_REVEAL, DEBATE, VOTING, RESULTS }
 var current_state: GameState = GameState.WAITING_PLAYERS
 @onready var LabelD = $Liste_D
 @onready var Dilemmes = $DilemmeGen.dict_dilemme
+@onready var DilemmeGen=$DilemmeGen
+@onready var CBoutons=$ContBoutons
 func _ready():
 	# Le symbole '$' permet d'accéder directement à un nœud enfant. 
 	# C'est comme un document.getElementById() en JS.
 	$Label.text = "Phase : Attente des joueurs..."
+	hide_dilemme()
+	
+
+func hide_dilemme():
+	if (CBoutons.visible==true):
+		CBoutons.hide()
+	else:
+		CBoutons.show()
+
+
 
 func change_state(new_state: GameState):
 	current_state = new_state
@@ -49,13 +61,19 @@ func change_state(new_state: GameState):
 	# On donne l'ordre à notre serveur d'envoyer ça à tout le monde
 	$NetworkServer.envoyer_a_tous(colis)
 
-	
+var dilemmes
 func Display_Dilemme():
+	hide_dilemme()
 	pass
-	# var liste=[]
-	# for i in range(3) :
-	# 	liste[i]=randi_range(0,(Dilemmes))
-	# print(liste)
+	var reponse=DilemmeGen.get_random_dilemme_list(5)
+	var texte=reponse[0]
+	dilemmes=reponse[1]
+	var i=0
+	for el in dilemmes:
+		for cle in el:
+			CBoutons.get_child(i).text+=el[cle]+" ,"
+		i+=1
+	# LabelD.text=texte
 
 
 
@@ -82,3 +100,20 @@ func _on_network_server_un_joueur_a_vote(id_joueur: Variant, choix: Variant) -> 
 		
 	else:
 		print("Vote ignoré : ce n'est pas le moment de voter !")
+
+func mise_en_forme_dic(dic):
+	var text=""
+	for cle in dic:
+		text+=dic[cle]+" ,"
+	return text
+		
+
+func _on_cont_boutons_choix_fait() -> void:
+	var dilemme_choisi=dilemmes[CBoutons.dilemme_choisi-1]
+	print(dilemme_choisi)
+	hide_dilemme()
+	# LabelD.text=DilemmeGen.mise_en_forme()
+	var texte=mise_en_forme_dic(dilemme_choisi)
+	LabelD.text=texte
+	$Button.pressed.emit()
+	print(texte)

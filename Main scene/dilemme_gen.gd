@@ -3,9 +3,9 @@ extends Node
 
 var dict_dilemme=[
 	{
-		"dilemme":"Dilemme 1",
-		"choixA":"choix A",
-		"choixB":"choix B"
+		"dilemme":"Tu préfère",
+		"choixA":"gateau caca",
+		"choixB":"caca gateau"
 	},
 	{
 		"dilemme":"Dilemme 2",
@@ -48,14 +48,33 @@ func _ready():
 func _process(delta: float) -> void:
 	pass
 
+#met en forme dictionnaire
+func mise_en_forme(di) :
+	var text=""
+	for el in di:
+		# print(el)
+		for cle in el:
+			text+=el[cle]+" ,"
+			# print(el[cle])
+		text+="\n"
+	return text
+		
+#renvoi tableau avec en premier, la mise en forme des n dilemmes, puis le dict des n dilemmes
 func get_random_dilemme_list(nb: int):
 	var dilemme_list=[]
 	var used_dilemme=[]
 
 	for i in range(nb):
-		var dilemme =randi_range(0,dict_dilemme.size())
-		
-		print(dilemme)
+		while true:
+			var dilemme =randi_range(0,dict_dilemme.size()-1)
+			if ( dict_dilemme[dilemme] not in used_dilemme):
+				dilemme_list.append(dict_dilemme[dilemme])
+				used_dilemme.append(dilemme_list[i])
+				break
+	print(dilemme_list)
+	
+	return [mise_en_forme(dilemme_list),dilemme_list]
+	
 
 
 

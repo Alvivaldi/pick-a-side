@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dyquy7selykic" path="res://Main scene/main.gd" id="1_3dcda"]
 [ext_resource type="Script" uid="uid://dsbvggxv6ngbp" path="res://Main scene/network_server.gd" id="2_g3q3t"]
 [ext_resource type="Script" uid="uid://rpj373pmilnn" path="res://Main scene/dilemme_gen.gd" id="3_t6lx1"]
+[ext_resource type="Script" uid="uid://blsnmfi4f6bvf" path="res://Main scene/cont_boutons.gd" id="4_tjwe2"]
 
 [node name="Main" type="Control" unique_id=916423008]
 layout_mode = 3
@@ -41,5 +42,44 @@ offset_top = 60.0
 offset_right = 997.0
 offset_bottom = 257.0
 
+[node name="ContBoutons" type="Node2D" parent="." unique_id=1907059611]
+script = ExtResource("4_tjwe2")
+
+[node name="Dilemme1" type="Button" parent="ContBoutons" unique_id=1235249035]
+offset_left = 489.0
+offset_top = 26.0
+offset_right = 1092.0
+offset_bottom = 98.0
+
+[node name="Dilemme2" type="Button" parent="ContBoutons" unique_id=1521193481]
+offset_left = 488.0
+offset_top = 111.0
+offset_right = 1091.0
+offset_bottom = 183.0
+
+[node name="Dilemme3" type="Button" parent="ContBoutons" unique_id=1645538825]
+offset_left = 489.0
+offset_top = 199.0
+offset_right = 1092.0
+offset_bottom = 271.0
+
+[node name="Dilemme4" type="Button" parent="ContBoutons" unique_id=1270150646]
+offset_left = 489.0
+offset_top = 285.0
+offset_right = 1092.0
+offset_bottom = 357.0
+
+[node name="Dilemme5" type="Button" parent="ContBoutons" unique_id=1481142932]
+offset_left = 491.0
+offset_top = 379.0
+offset_right = 1094.0
+offset_bottom = 451.0
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="un_joueur_a_vote" from="NetworkServer" to="." method="_on_network_server_un_joueur_a_vote"]
+[connection signal="choix_fait" from="ContBoutons" to="." method="_on_cont_boutons_choix_fait"]
+[connection signal="pressed" from="ContBoutons/Dilemme1" to="ContBoutons" method="_on_dilemme_1_pressed"]
+[connection signal="pressed" from="ContBoutons/Dilemme2" to="ContBoutons" method="_on_dilemme_2_pressed"]
+[connection signal="pressed" from="ContBoutons/Dilemme3" to="ContBoutons" method="_on_dilemme_3_pressed"]
+[connection signal="pressed" from="ContBoutons/Dilemme4" to="ContBoutons" method="_on_dilemme_4_pressed"]
+[connection signal="pressed" from="ContBoutons/Dilemme5" to="ContBoutons" method="_on_dilemme_5_pressed"]
