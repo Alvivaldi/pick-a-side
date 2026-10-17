@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://rpj373pmilnn" path="res://Main scene/scripts/dilemme_gen.gd" id="3_t6lx1"]
 [ext_resource type="Script" uid="uid://blsnmfi4f6bvf" path="res://Main scene/scripts/cont_boutons.gd" id="4_tjwe2"]
 [ext_resource type="Script" uid="uid://7u47ixfxvggi" path="res://Main scene/scripts/vote.gd" id="5_xmgng"]
+[ext_resource type="Script" uid="uid://cj71ws140edgs" path="res://Main scene/scripts/score.gd" id="6_mpf4w"]
 
 [node name="Main" type="Control" unique_id=916423008]
 layout_mode = 3
@@ -44,7 +45,6 @@ offset_right = 997.0
 offset_bottom = 257.0
 
 [node name="ContBoutons" type="Node2D" parent="." unique_id=1907059611]
-visible = false
 script = ExtResource("4_tjwe2")
 
 [node name="Dilemme1" type="Button" parent="ContBoutons" unique_id=1235249035]
@@ -77,6 +77,13 @@ offset_top = 379.0
 offset_right = 1094.0
 offset_bottom = 451.0
 
+[node name="Shuffle" type="Button" parent="ContBoutons" unique_id=1398288599]
+offset_left = 237.0
+offset_top = 381.0
+offset_right = 348.0
+offset_bottom = 453.0
+text = "Shuffle"
+
 [node name="Vote" type="Node2D" parent="." unique_id=1556599949]
 script = ExtResource("5_xmgng")
 
@@ -106,6 +113,9 @@ offset_top = 470.0
 offset_right = 965.0
 offset_bottom = 501.0
 
+[node name="Score" type="Node2D" parent="." unique_id=847855286]
+script = ExtResource("6_mpf4w")
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="un_joueur_a_vote" from="NetworkServer" to="." method="_on_network_server_un_joueur_a_vote"]
 [connection signal="choix_fait" from="ContBoutons" to="." method="_on_cont_boutons_choix_fait"]
@@ -114,5 +124,6 @@ offset_bottom = 501.0
 [connection signal="pressed" from="ContBoutons/Dilemme3" to="ContBoutons" method="_on_dilemme_3_pressed"]
 [connection signal="pressed" from="ContBoutons/Dilemme4" to="ContBoutons" method="_on_dilemme_4_pressed"]
 [connection signal="pressed" from="ContBoutons/Dilemme5" to="ContBoutons" method="_on_dilemme_5_pressed"]
+[connection signal="pressed" from="ContBoutons/Shuffle" to="." method="_on_shuffle_pressed"]
 [connection signal="pressed" from="Vote/CampA" to="Vote" method="_on_camp_a_pressed"]
 [connection signal="pressed" from="Vote/CampB" to="Vote" method="_on_camp_b_pressed"]

@@ -14,15 +14,15 @@ func _ready():
 	if (cont_bouton.visible==true ):
 		hide_dilemme()
 	
-
+#Cache ou montre les 5 boutons de dilemmes
 func hide_dilemme()->void:
-	if (cont_bouton.visible==true):
-		cont_bouton.hide()
-	else:
-		cont_bouton.show()
+	cont_bouton.hide()
+	
+func show_dilemme()->void:
+	cont_bouton.show()
 
 
-
+#change états de jeu
 func change_state(new_state: GameState)->void:
 	current_state = new_state
 	
@@ -65,6 +65,7 @@ func change_state(new_state: GameState)->void:
 	# On donne l'ordre à notre serveur d'envoyer ça à tout le monde
 	$NetworkServer.envoyer_a_tous(colis)
 
+#affiche résultat en fonction nb votes
 func start_result():
 	var texte:String ="La manche est remporté par le camp "
 	if gestion_vote.score_a>gestion_vote.score_b:
@@ -77,8 +78,10 @@ func start_result():
 	label_principal.text=texte
 
 var dilemmes
+
+#demande liste dilemmes, les distritbue dans les boutons
 func Display_Dilemme():
-	hide_dilemme()
+	show_dilemme()
 	pass
 	var reponse=dilemme_gen.get_random_dilemme_list(5)
 	var texte=reponse[0]
@@ -86,7 +89,7 @@ func Display_Dilemme():
 	var i=0
 	for el in dilemmes:
 		for cle in el:
-			cont_bouton.get_child(i).text+=el[cle]+" ,"
+			cont_bouton.get_child(i).text=el[cle]+" ,"
 		i+=1
 	# label_principal.text=texte
 
@@ -116,6 +119,7 @@ func _on_network_server_un_joueur_a_vote(id_joueur: Variant, choix: Variant) -> 
 	else:
 		print("Vote ignoré : ce n'est pas le moment de voter !")
 
+#affiche dilemme choisi/ un dictionnaire simple
 func mise_en_forme_dic(dic)->String:
 	var text=""
 	for cle in dic:
@@ -123,6 +127,7 @@ func mise_en_forme_dic(dic)->String:
 	return text
 		
 
+#si on appuis sur bouton dilemmes, selesctionne le dilemme et l'affiche en haut
 func _on_cont_boutons_choix_fait() -> void:
 	var dilemme_choisi=dilemmes[cont_bouton.dilemme_choisi-1]
 	print(dilemme_choisi)
@@ -132,3 +137,7 @@ func _on_cont_boutons_choix_fait() -> void:
 	label_principal.text=texte
 	$Button.pressed.emit()
 	print(texte)
+
+
+func _on_shuffle_pressed() -> void:
+	Display_Dilemme()
