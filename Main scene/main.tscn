@@ -18,10 +18,10 @@ script = ExtResource("1_3dcda")
 
 [node name="Label" type="Label" parent="." unique_id=298038908]
 layout_mode = 0
-offset_left = 196.0
-offset_top = 459.0
-offset_right = 549.0
-offset_bottom = 656.0
+offset_left = 173.0
+offset_top = 371.0
+offset_right = 481.0
+offset_bottom = 419.0
 text = "blabla"
 
 [node name="Button" type="Button" parent="." unique_id=1913809893]
@@ -45,6 +45,7 @@ offset_right = 997.0
 offset_bottom = 257.0
 
 [node name="ContBoutons" type="Node2D" parent="." unique_id=1907059611]
+visible = false
 script = ExtResource("4_tjwe2")
 
 [node name="Dilemme1" type="Button" parent="ContBoutons" unique_id=1235249035]
@@ -116,6 +117,20 @@ offset_bottom = 501.0
 [node name="Score" type="Node2D" parent="." unique_id=847855286]
 script = ExtResource("6_mpf4w")
 
+[node name="Asknbj" type="LineEdit" parent="Score" unique_id=1454967478]
+offset_left = 635.0
+offset_top = 208.0
+offset_right = 983.0
+offset_bottom = 266.0
+text = "5"
+placeholder_text = "Entre nb joueur"
+
+[node name="Info" type="Label" parent="Score" unique_id=1628847344]
+offset_left = 33.0
+offset_top = 439.0
+offset_right = 320.0
+offset_bottom = 611.0
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="un_joueur_a_vote" from="NetworkServer" to="." method="_on_network_server_un_joueur_a_vote"]
 [connection signal="choix_fait" from="ContBoutons" to="." method="_on_cont_boutons_choix_fait"]
@@ -127,3 +142,4 @@ script = ExtResource("6_mpf4w")
 [connection signal="pressed" from="ContBoutons/Shuffle" to="." method="_on_shuffle_pressed"]
 [connection signal="pressed" from="Vote/CampA" to="Vote" method="_on_camp_a_pressed"]
 [connection signal="pressed" from="Vote/CampB" to="Vote" method="_on_camp_b_pressed"]
+[connection signal="text_submitted" from="Score/Asknbj" to="Score" method="_on_asknbj_text_submitted"]
