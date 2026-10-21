@@ -117,13 +117,12 @@ offset_bottom = 501.0
 [node name="Score" type="Node2D" parent="." unique_id=847855286]
 script = ExtResource("6_mpf4w")
 
-[node name="Asknbj" type="LineEdit" parent="Score" unique_id=1454967478]
+[node name="Ask" type="LineEdit" parent="Score" unique_id=1454967478]
 offset_left = 635.0
 offset_top = 208.0
 offset_right = 983.0
 offset_bottom = 266.0
 text = "5"
-placeholder_text = "Entre nb joueur"
 
 [node name="Info" type="Label" parent="Score" unique_id=1628847344]
 offset_left = 33.0
@@ -142,4 +141,4 @@ offset_bottom = 611.0
 [connection signal="pressed" from="ContBoutons/Shuffle" to="." method="_on_shuffle_pressed"]
 [connection signal="pressed" from="Vote/CampA" to="Vote" method="_on_camp_a_pressed"]
 [connection signal="pressed" from="Vote/CampB" to="Vote" method="_on_camp_b_pressed"]
-[connection signal="text_submitted" from="Score/Asknbj" to="Score" method="_on_asknbj_text_submitted"]
+[connection signal="text_submitted" from="Score/Ask" to="Score" method="_on_asknbj_text_submitted"]
